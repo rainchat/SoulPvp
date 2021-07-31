@@ -47,19 +47,6 @@ public enum Language {
         return message;
     }
 
-    private boolean isList() {
-        if (FileManager.getInstance().getLanguage().getFile().contains(path)) {
-            return !FileManager.getInstance().getLanguage().getFile().getStringList(path).isEmpty();
-        } else {
-            return defaultMessage == null;
-        }
-    }
-
-
-    private boolean exists() {
-        return FileManager.getInstance().getLanguage().getFile().contains(path);
-    }
-
     public static void addMissingMessages() {
         FileConfiguration messages = FileManager.getInstance().getLanguage().getFile();
         boolean saveFile = false;
@@ -78,6 +65,17 @@ public enum Language {
         }
     }
 
+    private boolean isList() {
+        if (FileManager.getInstance().getLanguage().getFile().contains(path)) {
+            return !FileManager.getInstance().getLanguage().getFile().getStringList(path).isEmpty();
+        } else {
+            return defaultMessage == null;
+        }
+    }
+
+    private boolean exists() {
+        return FileManager.getInstance().getLanguage().getFile().contains(path);
+    }
 
     public String getmessage(Boolean preffix) {
 

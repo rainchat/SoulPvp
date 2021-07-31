@@ -9,7 +9,7 @@ public class PlayerCarma {
     private final UUID playerUUID;
     private double carma;
 
-    public PlayerCarma(Player player, double carma){
+    public PlayerCarma(Player player, double carma) {
         this.playerUUID = player.getUniqueId();
         this.carma = carma;
     }

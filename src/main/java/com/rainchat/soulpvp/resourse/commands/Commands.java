@@ -19,9 +19,9 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 public class Commands implements CommandExecutor {
+    public final CarmaManager carmaManager;
     private final FileManager fileManager = FileManager.getInstance();
     private final SqlLite sqlLite = SqlLite.getInstance();
-    public final CarmaManager carmaManager;
 
     public Commands(CarmaManager carmaManager) {
         this.carmaManager = carmaManager;

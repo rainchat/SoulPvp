@@ -11,6 +11,9 @@ import java.util.UUID;
 public class VaultCompatibility {
 
     public static boolean VAULT_ENABLED = true;
+    private static Economy econ = null;
+    private static Permission perms = null;
+    private static Chat chat = null;
 
     public static void vaultSetup() {
         if (Bukkit.getServer().getPluginManager().isPluginEnabled("Vault")) {
@@ -24,10 +27,6 @@ public class VaultCompatibility {
         }
     }
 
-    private static Economy econ = null;
-    private static Permission perms = null;
-    private static Chat chat = null;
-
     public static void setupEconomy() {
         if (Bukkit.getServer().getPluginManager().getPlugin("Vault") == null) {
             return;
@@ -39,18 +38,6 @@ public class VaultCompatibility {
         econ = rsp.getProvider();
     }
 
-    public boolean setupChat() {
-        RegisteredServiceProvider<Chat> rsp = Bukkit.getServer().getServicesManager().getRegistration(Chat.class);
-        chat = rsp.getProvider();
-        return chat != null;
-    }
-
-    public boolean setupPermissions() {
-        RegisteredServiceProvider<Permission> rsp = Bukkit.getServer().getServicesManager().getRegistration(Permission.class);
-        perms = rsp.getProvider();
-        return perms != null;
-    }
-
     public static void addVaultCurrency(UUID user, double amount) {
         econ.depositPlayer(Bukkit.getOfflinePlayer(user), amount);
     }
@@ -58,7 +45,6 @@ public class VaultCompatibility {
     public static void subtractCurrency(UUID user, double amount) {
         econ.withdrawPlayer(Bukkit.getOfflinePlayer(user), amount);
     }
-
 
     public static double checkCurrency(UUID user) {
         double currency = 0;
@@ -82,6 +68,18 @@ public class VaultCompatibility {
 
     public static Chat getChat() {
         return chat;
+    }
+
+    public boolean setupChat() {
+        RegisteredServiceProvider<Chat> rsp = Bukkit.getServer().getServicesManager().getRegistration(Chat.class);
+        chat = rsp.getProvider();
+        return chat != null;
+    }
+
+    public boolean setupPermissions() {
+        RegisteredServiceProvider<Permission> rsp = Bukkit.getServer().getServicesManager().getRegistration(Permission.class);
+        perms = rsp.getProvider();
+        return perms != null;
     }
 
 }

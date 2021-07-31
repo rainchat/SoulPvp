@@ -27,7 +27,7 @@ public class CarmaManager {
     public void unLoadCarmaData(Player player) {
         PlayerCarma playerCarma = getPlayerCarma(player);
         if (playerCarma != null) {
-            CarmaDate.update(player,playerCarma.getCarma());
+            CarmaDate.update(player, playerCarma.getCarma());
             removePlayerCarma(player);
         }
     }
@@ -37,7 +37,7 @@ public class CarmaManager {
     }
 
     public void removePlayerCarma(Player player) {
-        for (PlayerCarma playerCarma: playerCarmaSet) {
+        for (PlayerCarma playerCarma : playerCarmaSet) {
             if (playerCarma.getPlayerUUID().equals(player.getUniqueId())) {
                 playerCarmaSet.remove(playerCarma);
                 return;
@@ -46,7 +46,7 @@ public class CarmaManager {
     }
 
     public PlayerCarma getPlayerCarma(Player player) {
-        for (PlayerCarma playerCarma: playerCarmaSet) {
+        for (PlayerCarma playerCarma : playerCarmaSet) {
             if (playerCarma.getPlayerUUID().equals(player.getUniqueId())) {
                 return playerCarma;
             }
@@ -55,7 +55,7 @@ public class CarmaManager {
     }
 
     public PlayerCarma getPlayerCarma(UUID uuid) {
-        for (PlayerCarma playerCarma: playerCarmaSet) {
+        for (PlayerCarma playerCarma : playerCarmaSet) {
             if (playerCarma.getPlayerUUID().equals(uuid)) {
                 return playerCarma;
             }

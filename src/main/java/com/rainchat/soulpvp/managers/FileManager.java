@@ -16,16 +16,16 @@ import java.util.HashMap;
 public class FileManager {
 
     private static final FileManager instance = new FileManager();
-    private Plugin plugin;
-    private String prefix = "";
-    private boolean log = false;
     private final HashMap<Files, File> files = new HashMap<>();
-    private CustomFile LanguageFile;
     private final ArrayList<String> homeFolders = new ArrayList<>();
     private final ArrayList<CustomFile> customFiles = new ArrayList<>();
     private final HashMap<String, String> jarHomeFolders = new HashMap<>();
     private final HashMap<String, String> autoGenerateFiles = new HashMap<>();
     private final HashMap<Files, FileConfiguration> configurations = new HashMap<>();
+    private Plugin plugin;
+    private String prefix = "";
+    private boolean log = false;
+    private CustomFile LanguageFile;
 
     public static FileManager getInstance() {
         return instance;

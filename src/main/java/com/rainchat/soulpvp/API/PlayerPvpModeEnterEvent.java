@@ -8,42 +8,21 @@ package com.rainchat.soulpvp.API;
 import com.rainchat.soulpvp.SoulCarma;
 import com.rainchat.soulpvp.data.configs.ConfigSettings;
 import com.rainchat.soulpvp.data.configs.Language;
+import com.rainchat.soulpvp.managers.NametagManager;
 import com.rainchat.soulpvp.utils.Color;
 import com.rainchat.soulpvp.utils.EventCaller;
-import com.rainchat.soulpvp.managers.NametagManager;
-import java.util.HashMap;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Cancellable;
-import org.bukkit.event.Event;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.HandlerList;
-import org.bukkit.event.Listener;
+import org.bukkit.event.*;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.HashMap;
 
 public class PlayerPvpModeEnterEvent extends Event implements Cancellable {
     private static final HashMap<Player, PlayerPvpModeEnterEvent> playerPlayerPreTeleportEventHashMap = new HashMap();
     private static final HandlerList handlers = new HandlerList();
-    private boolean isCancelled = false;
     private final Player player;
-
-    public static void JoinInPvp(Player player, Boolean update) {
-        PlayerPvpModeEnterEvent pvpmode = playerPlayerPreTeleportEventHashMap.get(player);
-        if (pvpmode != null) {
-            pvpmode.setCancelled(true);
-        }
-
-        new EventCaller(new PlayerPvpModeEnterEvent(player, ConfigSettings.CARMA_PVP_MODE, update));
-    }
-
-    public static boolean isBad(Player player) {
-        PlayerPvpModeEnterEvent pvpmode = playerPlayerPreTeleportEventHashMap.get(player);
-        return pvpmode != null;
-    }
-
-    public static String getPvpTag(Player player) {
-        return isBad(player) ? Color.parseHexString(ConfigSettings.CARMA_IS_PVP) : Color.parseHexString(ConfigSettings.CARMA_IS_NONPVP);
-    }
+    private boolean isCancelled = false;
 
     public PlayerPvpModeEnterEvent(final Player player, final int timer, Boolean update) {
         this.player = player;
@@ -62,7 +41,6 @@ public class PlayerPvpModeEnterEvent extends Event implements Cancellable {
                 if (!PlayerPvpModeEnterEvent.this.isCancelled) {
                     PlayerPvpModeEnterEvent.playerPlayerPreTeleportEventHashMap.remove(player);
                     if (player.isOnline()) {
-                        ;
                     }
                 }
             }
@@ -88,11 +66,29 @@ public class PlayerPvpModeEnterEvent extends Event implements Cancellable {
         }).runTaskTimer(SoulCarma.getPluginInstance(), 0L, 20L);
     }
 
-    public HandlerList getHandlers() {
-        return handlers;
+    public static void JoinInPvp(Player player, Boolean update) {
+        PlayerPvpModeEnterEvent pvpmode = playerPlayerPreTeleportEventHashMap.get(player);
+        if (pvpmode != null) {
+            pvpmode.setCancelled(true);
+        }
+
+        new EventCaller(new PlayerPvpModeEnterEvent(player, ConfigSettings.CARMA_PVP_MODE, update));
+    }
+
+    public static boolean isBad(Player player) {
+        PlayerPvpModeEnterEvent pvpmode = playerPlayerPreTeleportEventHashMap.get(player);
+        return pvpmode != null;
+    }
+
+    public static String getPvpTag(Player player) {
+        return isBad(player) ? Color.parseHexString(ConfigSettings.CARMA_IS_PVP) : Color.parseHexString(ConfigSettings.CARMA_IS_NONPVP);
     }
 
     public static HandlerList getHandlerList() {
+        return handlers;
+    }
+
+    public HandlerList getHandlers() {
         return handlers;
     }
 
@@ -117,7 +113,7 @@ public class PlayerPvpModeEnterEvent extends Event implements Cancellable {
                 ignoreCancelled = true
         )
         public void onPlayerMove(PlayerDeathEvent event) {
-            PlayerPvpModeEnterEvent pvpmode = (PlayerPvpModeEnterEvent)PlayerPvpModeEnterEvent.playerPlayerPreTeleportEventHashMap.get(event.getEntity());
+            PlayerPvpModeEnterEvent pvpmode = PlayerPvpModeEnterEvent.playerPlayerPreTeleportEventHashMap.get(event.getEntity());
             if (pvpmode != null) {
                 pvpmode.setCancelled(true);
             }

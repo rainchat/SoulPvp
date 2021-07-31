@@ -6,14 +6,9 @@ import java.util.Random;
 
 public class WeightedRandomBag<T extends Object> {
 
-    private class Entry {
-        double accumulatedWeight;
-        T object;
-    }
-
     private final List<Entry> entries = new ArrayList<>();
-    private double accumulatedWeight;
     private final Random rand = new Random();
+    private double accumulatedWeight;
 
     public void addEntry(T object, double weight) {
         accumulatedWeight += weight;
@@ -32,5 +27,10 @@ public class WeightedRandomBag<T extends Object> {
             }
         }
         return null; //should only happen when there are no entries
+    }
+
+    private class Entry {
+        double accumulatedWeight;
+        T object;
     }
 }

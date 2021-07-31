@@ -3,10 +3,8 @@ package com.rainchat.soulpvp.resourse.listeners;
 import com.rainchat.soulpvp.API.PlayerDeathDropEvent;
 import com.rainchat.soulpvp.data.carma.PlayerCarma;
 import com.rainchat.soulpvp.data.configs.ConfigSettings;
-import com.rainchat.soulpvp.data.database.CarmaDate;
 import com.rainchat.soulpvp.managers.CarmaManager;
 import com.rainchat.soulpvp.managers.FileManager;
-import com.rainchat.soulpvp.utils.WeightedRandomBag;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -31,11 +29,7 @@ public class DeathDropListener implements Listener {
     @EventHandler
     public void onDrop(PlayerDeathDropEvent e) {
         double chance = ConfigSettings.CARMA_DROP_CHANCE;
-        if (this.drop(chance)) {
-            e.setCancelled(false);
-        } else {
-            e.setCancelled(true);
-        }
+        e.setCancelled(!this.drop(chance));
     }
 
     @EventHandler
@@ -60,7 +54,7 @@ public class DeathDropListener implements Listener {
             p.getInventory().setArmorContents(inventory);
             inventory = p.getInventory().getContents();
 
-            for(a = 0; a < inventory.length; ++a) {
+            for (a = 0; a < inventory.length; ++a) {
 
                 i = inventory[a];
                 if (i != null && !i.getType().equals(Material.AIR)) {
@@ -69,7 +63,7 @@ public class DeathDropListener implements Listener {
                     i2 = ev.getItem();
                     if (ev.isCancelled()) {
                         inventory[a] = i2;
-                    } else if (slots.contains(a)){
+                    } else if (slots.contains(a)) {
                         continue;
                     } else {
                         inventory[a] = null;
@@ -95,8 +89,8 @@ public class DeathDropListener implements Listener {
         Iterator var4 = file.getConfigurationSection("Carma.point-tag").getKeys(false).iterator();
 
         String s;
-        while(var4.hasNext()) {
-            s = (String)var4.next();
+        while (var4.hasNext()) {
+            s = (String) var4.next();
             if (x >= file.getInt("Carma.point-tag." + s + ".points", 0)) {
                 x = file.getInt("Carma.point-tag." + s + ".save-chance", 0);
                 break;

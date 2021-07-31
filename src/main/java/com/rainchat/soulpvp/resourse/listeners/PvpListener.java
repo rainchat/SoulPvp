@@ -27,23 +27,23 @@ public class PvpListener implements Listener {
     }
 
     @EventHandler
-    public void onPlayerHit(EntityDamageByEntityEvent e)  {
-        if (!(e.getDamager() instanceof Player) && !(e.getEntity() instanceof Player)) return;
+    public void onPlayerHit(EntityDamageByEntityEvent e) {
 
-        Player damager = (Player)e.getDamager();
-        Player player = (Player)e.getEntity();
+        if (!(e.getDamager() instanceof Player && e.getEntity() instanceof Player)) return;
+
+        Player damager = (Player) e.getDamager();
+        Player player = (Player) e.getEntity();
 
         PlayerCarma playerCarma = carmaManager.getPlayerCarma(player);
         PlayerCarma damagerCarma = carmaManager.getPlayerCarma(damager);
 
         if (!PlayerPvpModeEnterEvent.isBad(player)) {
             PlayerPvpModeEnterEvent.JoinInPvp(damager, PlayerPvpModeEnterEvent.isBad(damager));
-        } else if (PlayerPvpModeEnterEvent.isBad(player) && playerCarma.getCarma() >= ConfigSettings.CARMA_MAX_CARMA){
+        } else if (PlayerPvpModeEnterEvent.isBad(player) && playerCarma.getCarma() >= ConfigSettings.CARMA_MAX_CARMA) {
 
         } else if (damagerCarma.getCarma() <= ConfigSettings.CARMA_MAX_CARMA) {
             PlayerPvpModeEnterEvent.JoinInPvp(damager, PlayerPvpModeEnterEvent.isBad(damager));
         }
-
 
 
     }
@@ -56,7 +56,7 @@ public class PvpListener implements Listener {
             PlayerCarma killerCarma = carmaManager.getPlayerCarma(killer);
 
             if (mob instanceof Player) {
-                Player player = (Player)mob;
+                Player player = (Player) mob;
 
                 PlayerCarma playerCarma = carmaManager.getPlayerCarma(player);
 
@@ -67,11 +67,7 @@ public class PvpListener implements Listener {
 
                 if (PlayerPvpModeEnterEvent.isBad(player) && playerCarma.getCarma() != ConfigSettings.CARMA_MAX_CARMA) {
                     if (killerCarma.getCarma() <= ConfigSettings.CARMA_MAX_CARMA) {
-                        if (PlayerPvpModeEnterEvent.isBad(killer)) {
-                            PlayerPvpModeEnterEvent.JoinInPvp(killer, true);
-                        } else {
-                            PlayerPvpModeEnterEvent.JoinInPvp(killer, false);
-                        }
+                        PlayerPvpModeEnterEvent.JoinInPvp(killer, PlayerPvpModeEnterEvent.isBad(killer));
 
                         (new BukkitRunnable() {
                             public void run() {
@@ -81,11 +77,7 @@ public class PvpListener implements Listener {
                         killerCarma.addCarma(ConfigSettings.CARMA_WHEN_KILL);
                     }
                 } else {
-                    if (PlayerPvpModeEnterEvent.isBad(killer)) {
-                        PlayerPvpModeEnterEvent.JoinInPvp(killer, true);
-                    } else {
-                        PlayerPvpModeEnterEvent.JoinInPvp(killer, false);
-                    }
+                    PlayerPvpModeEnterEvent.JoinInPvp(killer, PlayerPvpModeEnterEvent.isBad(killer));
 
                     (new BukkitRunnable() {
                         public void run() {

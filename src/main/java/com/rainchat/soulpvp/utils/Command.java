@@ -14,7 +14,7 @@ public abstract class Command implements CommandExecutor {
     }
 
     public boolean onCommand(CommandSender commandSender, org.bukkit.command.Command command, String s, String[] strings) {
-        if(command.getLabel().equalsIgnoreCase(name)) {
+        if (command.getLabel().equalsIgnoreCase(name)) {
             return run((Player) commandSender, strings);
         }
         return false;

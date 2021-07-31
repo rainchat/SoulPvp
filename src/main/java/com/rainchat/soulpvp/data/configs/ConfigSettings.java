@@ -24,20 +24,19 @@ public class ConfigSettings {
     public static List<Integer> ITEMS_NO_DROP;
 
 
-
     ConfigSettings() {
         FileConfiguration config = FileManager.Files.CONFIG.getFile();
         LANGUAGE = config.getString("Settings.language", "Ru_ru");
         createLanguage();
 
-        CARMA_MAX_CARMA = config.getDouble("WorldGuard.ignores-regions", 1000);
-        CARMA_DROP_CHANCE = config.getDouble("Settings-Claim.enabled-worlds", 50);
-        CARMA_WHEN_HIT = config.getDouble("Settings-Claim.default-title-description", -25);
-        CARMA_WHEN_KILL = config.getDouble("Settings-Claim.expiration.time", 5);
+        CARMA_MAX_CARMA = config.getDouble("Carma.max-point", 1000);
+        CARMA_DROP_CHANCE = config.getDouble("Carma.when-hit-player", 50);
+        CARMA_WHEN_HIT = config.getDouble("Carma.when-kill-player", -25);
+        CARMA_WHEN_KILL = config.getDouble("Carma.drop-percent", -250);
 
-        CARMA_PVP_MODE = config.getInt("WorldGuard.ignores-regions");
-        CARMA_IS_NONPVP = config.getString("Settings-Claim.enabled-worlds");
-        CARMA_IS_PVP = config.getString("Settings-Claim.default-title-description", "A peaceful settlement.");
+        CARMA_PVP_MODE = config.getInt("Carma.pvp-mode", 15);
+        CARMA_IS_NONPVP = config.getString("Carma.pvp-tag.nopvp", "");
+        CARMA_IS_PVP = config.getString("Carma.pvp-tag.pvp", "&e");
     }
 
 

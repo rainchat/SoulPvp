@@ -62,7 +62,7 @@ final public class Nametag {
 
     public void registerTeams(Scoreboard scoreboard) {
         for (Player teamPlayer : Bukkit.getOnlinePlayers()) {
-            String text = PlaceholderApiCompatibility.setPlaceholders(teamPlayer,PlaceholderApiCompatibility.getTeg(teamPlayer));
+            String text = PlaceholderApiCompatibility.setPlaceholders(teamPlayer, PlaceholderApiCompatibility.getTeg(teamPlayer));
             registerTeam(scoreboard, teamPlayer.getName(), text);
         }
     }
@@ -83,7 +83,7 @@ final public class Nametag {
         char colour = 0;
         char[] chars = prefix.toCharArray();
 
-        for(int i = 0; i < chars.length; ++i) {
+        for (int i = 0; i < chars.length; ++i) {
             char at = chars[i];
             if ((at == 167 || at == '&') && i + 1 < chars.length) {
                 char code = chars[i + 1];
@@ -97,6 +97,6 @@ final public class Nametag {
     }
 
     public void remove() {
-       // team.unregister();
+        // team.unregister();
     }
 }
