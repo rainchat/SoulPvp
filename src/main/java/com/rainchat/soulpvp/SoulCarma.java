@@ -38,14 +38,14 @@ public final class SoulCarma extends JavaPlugin {
                 .registerDefaultGenerateFiles("Ru_ru.yml", "/Languages", languages)
                 .setup(getPluginInstance());
 
-
+        this.carmaManager = new CarmaManager();
         sqlLite.onLoad();
         this.getCommand("soulcarma").setExecutor(new Commands(carmaManager));
         this.getCommand("soulcarma").setTabCompleter(new CommandTab());
         Language.addMissingMessages();
 
         this.nametagManager.registerNametags();
-        this.carmaManager = new CarmaManager();
+
 
 
         //hooks setup
