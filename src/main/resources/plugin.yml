@@ -1,0 +1,31 @@
+name: SoulCarma
+version: ${project.version}
+main: com.rainchat.soulpvp.SoulCarma
+api-version: 1.16
+authors: [ rain_chat ]
+softdepend:
+  - PlaceholderAPI
+  - Vault
+
+commands:
+  soulcarma:
+
+
+permissions:
+
+  # PLAYER PERMISSION
+  soulpvp.user.*:
+    default: op
+    children:
+      soulpvp.command.carma.check: true
+      soulpvp.command.carma.top_bad: true
+
+  # ADMIN PERMISSION
+  soulpvp.admin.*:
+    default: op
+    description: only for admins.
+    children:
+      soulpvp.command.reload: true
+      soulpvp.command.carma.add: true
+      soulpvp.command.carma.check_other: true
+      soulpvp.command.carma.set: true

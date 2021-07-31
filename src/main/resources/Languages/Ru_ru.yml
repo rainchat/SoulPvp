@@ -1,0 +1,12 @@
+Preffix: '&f[&bSoulCamp&f] '
+Message:
+  global:
+    No-Permissions: '&cУ вас нет прав чтобы использовать эту команду'
+    Reload: '&7Все конфиги перезагружены..'
+  carma:
+    Check-self-carma: '&7Ваши очки кармы равны &e%arg2%&7!'
+    Check-player-carma: '&7Очки порядочности у игрока &e%arg1% &7равны &e%arg2% '
+    Add-player-carma: '&7Игроку &e%arg1% &7было добавлено &e%arg2% &7очков кармы'
+    Set-player-carma: '&7Игроку &e%arg1% &7были установлены очки кармы &e%arg2%!'
+    On-pvp-join: '&7Прекратите избивать людей, зачем вы это делаете!'
+    On-pvp-leave: '&7Вы вышли из пвп, больше не деритесь!'
